@@ -1,11 +1,10 @@
 <html>
-    <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><meta content="Quantum Society Timezone" property="og:title">
-    <meta content="This tool will help you easily get your timezone, and copy it to your clipboard." property="og:description">
+    <meta content="This tool will help you easily get your UTC offset, and copy it to your clipboard." property="og:description">
     <meta content="background.png" property="og:image">
-    <meta name="theme-color" content="#FF0000"></head><body></body></html>
-    <title>Get your timezone!</title>
+    <meta name="theme-color" content="#FF0000"></head><body></body>
+    <title>Get your UTC offset!</title>
     <style>
         body {
             margin: 0;
@@ -60,7 +59,7 @@
     </div>
     
     <div class="center">
-        <h2>Your timezone is:</h2>
+        <h2>Your UTC offset is:</h2>
     </div>
 
     <div class="center">
@@ -68,12 +67,15 @@
     </div>
 
     <script>
-        var timezone=Intl.DateTimeFormat().resolvedOptions().timeZone;
+		var date = new Date();
+        var offset = date.getTimezoneOffset();
+
+            document.getElementById("text")
+                .innerHTML = offset + " minutes";
+
+        document.getElementById("copy").innerHTML="Copied your UTC offset into the Clipboard!";
         
-        document.getElementById("text").innerHTML=timezone;
-        document.getElementById("copy").innerHTML="Copied your timezone into the Clipboard!";
-        
-        navigator.clipboard.writeText(timezone)
-        .catch(e=>document.getElementById("copy").innerHTML="There was an error copying your timezone to clipboard!");
+        navigator.clipboard.writeText(offset)
+        .catch(e=>document.getElementById("copy").innerHTML="There was an error copying your UTC offset to clipboard!");
     </script>
 </html>
